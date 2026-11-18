@@ -12,10 +12,11 @@
 /* Layout idea: a quiet, left-aligned academic profile on cool paper. Profile links sit in
    the top bar; the name is the only large element; everything else is one reading column. */
 :root {
-  --paper: #eef1f4;
+  color-scheme: light;
+  --paper: #ffffff;
   --ink: #131a26;
   --muted: #556072;
-  --line: #cdd5de;
+  --line: #dde3ea;
   --accent: #2340d0;
   --accent-ink: #ffffff;
 
@@ -26,27 +27,6 @@
   --gutter: clamp(16px, 4vw, 44px);
   --measure: 62ch;
 }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    color-scheme: dark;
-    --paper: #0d121a;
-    --ink: #e7ebf1;
-    --muted: #9aa5b5;
-    --line: #293343;
-    --accent: #93a5ff;
-    --accent-ink: #0d121a;
-  }
-}
-:root[data-theme="dark"] {
-  color-scheme: dark;
-  --paper: #0d121a;
-  --ink: #e7ebf1;
-  --muted: #9aa5b5;
-  --line: #293343;
-  --accent: #93a5ff;
-  --accent-ink: #0d121a;
-}
-
 *, *::before, *::after { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; }
 body {

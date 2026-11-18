@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Zijie Cheng</title>
+<meta name="description" content="Zijie Cheng is a Computer Science PhD student at University College London and a medical AI researcher at the UCL Hawkes Institute, working on continual learning for medical foundation models.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+/* Layout idea: a quiet, left-aligned academic profile on cool paper. Profile links sit in
+   the top bar; the name is the only large element; everything else is one reading column. */
+:root {
+  --paper: #eef1f4;
+  --ink: #131a26;
+  --muted: #556072;
+  --line: #cdd5de;
+  --accent: #2340d0;
+  --accent-ink: #ffffff;
+
+  --font-display: "Bricolage Grotesque", "Avenir Next Condensed", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "IBM Plex Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  --gutter: clamp(16px, 4vw, 44px);
+  --measure: 62ch;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --paper: #0d121a;
+    --ink: #e7ebf1;
+    --muted: #9aa5b5;
+    --line: #293343;
+    --accent: #93a5ff;
+    --accent-ink: #0d121a;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --paper: #0d121a;
+  --ink: #e7ebf1;
+  --muted: #9aa5b5;
+  --line: #293343;
+  --accent: #93a5ff;
+  --accent-ink: #0d121a;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+}
+a { color: var(--accent); text-underline-offset: 0.18em; text-decoration-thickness: 1px; }
+a:hover { text-decoration-thickness: 2px; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; }
+p { margin: 0; }
+
+.wrap { max-width: 980px; margin: 0 auto; padding: 0 var(--gutter); }
+
+/* Top bar with profile links */
+.top {
+  display: flex; flex-wrap: wrap; gap: 12px 24px;
+  align-items: center; justify-content: space-between;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--line);
+}
+.top .where { font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.02em; color: var(--muted); }
+.profiles { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; margin: 0; padding: 0; }
+.profiles a {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 7px 13px 7px 10px;
+  border: 1px solid var(--line); border-radius: 999px;
+  font-size: 0.88rem; font-weight: 500; color: var(--ink); text-decoration: none;
+}
+.profiles a:hover { border-color: var(--ink); }
+.profiles svg { width: 18px; height: 18px; flex: none; }
+
+/* Hero */
+.hero { display: flex; flex-direction: column; gap: 20px; padding: clamp(40px, 8vw, 96px) 0 clamp(40px, 7vw, 80px); }
+.hero h1 {
+  font-size: clamp(3.4rem, 12vw, 7.6rem);
+  font-weight: 750;
+  font-stretch: 85%;
+  line-height: 0.9;
+  letter-spacing: -0.035em;
+}
+.portrait {
+  width: clamp(112px, 22vw, 168px); height: auto; aspect-ratio: 1;
+  max-width: 100%; object-fit: cover;
+  border-radius: 20px; border: 1px solid var(--line);
+  margin-bottom: 8px;
+}
+.role { font-family: var(--font-mono); font-size: 0.86rem; color: var(--muted); }
+.thesis {
+  font-family: var(--font-display);
+  font-size: clamp(1.35rem, 2.8vw, 1.9rem);
+  font-weight: 450;
+  line-height: 1.25;
+  max-width: 26ch;
+  text-wrap: balance;
+}
+.thesis em { font-style: normal; color: var(--accent); }
+
+/* Sections */
+.section {
+  display: grid;
+  grid-template-columns: minmax(0, 180px) minmax(0, 1fr);
+  gap: 16px clamp(24px, 5vw, 56px);
+  padding: clamp(30px, 5vw, 52px) 0;
+  border-top: 1px solid var(--line);
+}
+.section > h2 {
+  font-family: var(--font-mono); font-size: 0.78rem; font-weight: 500;
+  letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted);
+  padding-top: 6px;
+}
+.prose { display: flex; flex-direction: column; gap: 16px; max-width: var(--measure); }
+.prose .lead { font-size: 1.16rem; line-height: 1.5; }
+
+.cv { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 18px; }
+.cv li { display: grid; grid-template-columns: 8.6rem minmax(0, 1fr); gap: 2px 20px; }
+.cv .when { font-family: var(--font-mono); font-size: 0.86rem; color: var(--muted); font-variant-numeric: tabular-nums; padding-top: 4px; }
+.cv h3 { font-size: 1.14rem; font-weight: 650; line-height: 1.25; letter-spacing: -0.01em; }
+.cv p { font-size: 0.94rem; color: var(--muted); }
+
+.pubs { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.pub {
+  display: grid; grid-template-columns: 4.2rem minmax(0, 1fr); gap: 4px 20px;
+  padding: 20px 0; border-top: 1px solid var(--line);
+}
+.pub:first-child { border-top: 0; padding-top: 0; }
+.pub .year { font-family: var(--font-mono); font-size: 0.86rem; color: var(--muted); font-variant-numeric: tabular-nums; padding-top: 5px; }
+.pub-body { display: flex; flex-direction: column; gap: 6px; max-width: 66ch; }
+.pub h3 { font-size: 1.22rem; font-weight: 650; line-height: 1.24; letter-spacing: -0.012em; }
+.pub .authors { font-size: 0.94rem; color: var(--muted); }
+.pub .authors strong { color: var(--ink); font-weight: 600; }
+.pub .venue { font-size: 0.94rem; }
+.meta { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; margin-top: 4px; }
+.pill {
+  font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.03em;
+  padding: 3px 8px; border: 1px solid var(--line); border-radius: 4px; color: var(--muted);
+}
+.meta a { font-size: 0.9rem; font-weight: 500; }
+.more { margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 0.94rem; color: var(--muted); }
+
+.contact { display: flex; flex-direction: column; gap: 16px; }
+.email {
+  font-family: var(--font-display); font-weight: 650;
+  font-size: clamp(1.3rem, 4.4vw, 2.2rem); letter-spacing: -0.02em; line-height: 1.1;
+  color: var(--ink); text-decoration-color: var(--accent); overflow-wrap: anywhere;
+}
+.btn {
+  align-self: flex-start;
+  padding: 9px 16px;
+  border: 1px solid var(--ink); border-radius: 999px;
+  font-family: var(--font-body); font-size: 0.9rem; font-weight: 500;
+  color: var(--ink); background: transparent; cursor: pointer;
+}
+.btn:hover { background: var(--ink); color: var(--paper); }
+.contact address { font-style: normal; color: var(--muted); font-size: 0.96rem; max-width: 46ch; }
+
+footer { border-top: 1px solid var(--line); padding: 20px 0 40px; font-family: var(--font-mono); font-size: 0.74rem; color: var(--muted); }
+
+@media (max-width: 720px) {
+  .section { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 480px) {
+  body { font-size: 16px; }
+  .pub { grid-template-columns: minmax(0, 1fr); }
+  .cv li { grid-template-columns: minmax(0, 1fr); }
+  .cv .when { padding-top: 0; }
+  .pub .year { padding-top: 0; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <span class="where">UCL · Computer Science · Hawkes Institute</span>
+    <ul class="profiles" aria-label="Profiles">
+      <li>
+        <a id="linkedin-link" href="https://www.linkedin.com/in/zijie-cheng-670314351/" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4"></rect><circle cx="12" cy="10" r="2.6"></circle><path d="M7.2 17.4c.9-2.2 2.7-3.3 4.8-3.3s3.9 1.1 4.8 3.3"></path></svg>
+          LinkedIn
+        </a>
+      </li>
+      <li>
+        <a href="https://scholar.google.com/citations?user=RzqymykAAAAJ" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4 2.5 9 12 14l9.5-5L12 4z"></path><path d="M6.5 11.3v4.2c1.5 1.5 3.4 2.2 5.5 2.2s4-.7 5.5-2.2v-4.2"></path><path d="M21.5 9v5.5"></path></svg>
+          Google Scholar
+        </a>
+      </li>
+      <li>
+        <a href="https://github.com/ziijiecheng" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8.5 7-5 5 5 5"></path><path d="m15.5 7 5 5-5 5"></path></svg>
+          GitHub
+        </a>
+      </li>
+    </ul>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="name">
+      <img class="portrait" src="photo.jpg" width="560" height="560" alt="Portrait of Zijie Cheng">
+      <h1 id="name">Zijie Cheng</h1>
+      <p class="role">Medical AI researcher, UCL Hawkes Institute</p>
+      <p class="thesis">I work on <em>continual learning</em> for medical foundation models.</p>
+    </section>
+
+    <section class="section" id="about" aria-labelledby="about-h">
+      <h2 id="about-h">About</h2>
+      <div class="prose">
+        <p class="lead">I am a PhD student in Computer Science at University College London and a medical AI researcher at the UCL Hawkes Institute.</p>
+        <p>My PhD is about adapting foundation models to new domains through continual learning. When a model moves from one domain to another, what should it retain, what should it forget, and how can we understand that knowledge through the images themselves? I work on retinal images and brain scans, supervised by Siddharth Swaroop and Daniel Alexander.</p>
+        <p>I am glad to hear from clinicians, machine learning researchers and engineers interested in continual learning and domain adaptation for medical foundation models, especially if you have data or clinical questions to explore.</p>
+      </div>
+    </section>
+
+    <section class="section" id="education" aria-labelledby="edu-h">
+      <h2 id="edu-h">Education</h2>
+      <ol class="cv">
+        <li>
+          <span class="when">2026 – 2030</span>
+          <div>
+            <h3>PhD, Computer Science</h3>
+            <p>University College London</p>
+          </div>
+        </li>
+        <li>
+          <span class="when">2023 – 2024</span>
+          <div>
+            <h3>MSc, Artificial Intelligence and Medical Imaging</h3>
+            <p>University College London · Merit</p>
+          </div>
+        </li>
+        <li>
+          <span class="when">2021 – 2023</span>
+          <div>
+            <h3>BEng, Electrical and Electronics Engineering</h3>
+            <p>City St George’s, University of London · First class</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <section class="section" id="experience" aria-labelledby="exp-h">
+      <h2 id="exp-h">Experience</h2>
+      <ol class="cv">
+        <li>
+          <span class="when">Oct 2026 – now</span>
+          <div>
+            <h3>Postgraduate Teaching Assistant</h3>
+            <p>University College London</p>
+          </div>
+        </li>
+        <li>
+          <span class="when">Dec 2024 – now</span>
+          <div>
+            <h3>Graduate Research Assistant</h3>
+            <p>University College London · Part-time</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <section class="section" id="publications" aria-labelledby="pubs-h">
+      <h2 id="pubs-h">Publications</h2>
+      <div>
+        <ol class="pubs">
+          <li class="pub">
+            <span class="year">2025</span>
+            <div class="pub-body">
+              <h3>Understanding the robustness of vision-language models to medical image artefacts</h3>
+              <p class="authors"><strong>Zijie Cheng</strong>, A. Y. Ong, S. K. Wagner, D. A. Merle, L. Ju, et al.</p>
+              <p class="venue"><i>npj Digital Medicine</i> 8, 727</p>
+              <div class="meta">
+                <span class="pill">First author</span>
+                <a href="https://doi.org/10.1038/s41746-025-02108-w" rel="noopener">Paper</a>
+                <a href="https://github.com/ziijiecheng/VLM_robustness" rel="noopener">Code</a>
+              </div>
+            </div>
+          </li>
+          <li class="pub">
+            <span class="year">2025</span>
+            <div class="pub-body">
+              <h3>Enhancing contrastive learning for retinal imaging via adjusted augmentation scales</h3>
+              <p class="authors"><strong>Zijie Cheng</strong>, Boxuan Li, Andre Altmann, Pearse A. Keane, Yukun Zhou</p>
+              <p class="venue"><i>Medical Imaging with Deep Learning (MIDL)</i>, PMLR 301, 214–225</p>
+              <div class="meta">
+                <span class="pill">First author</span>
+                <a href="https://proceedings.mlr.press/v301/cheng26a.html" rel="noopener">Paper</a>
+                <a href="https://github.com/ziijiecheng/Enhance-contrastive-SSL-for-Retinal-Imaging" rel="noopener">Code</a>
+              </div>
+            </div>
+          </li>
+          <li class="pub">
+            <span class="year">2022</span>
+            <div class="pub-body">
+              <h3>Chirality and frequency measurement of longitudinal rolling of human sperm using optical trap</h3>
+              <p class="authors">Z. Zhong, C. Zhang, R. Liu, J. He, H. Yang, <strong>Zijie Cheng</strong>, T. Wang, M. Shao, et al.</p>
+              <p class="venue"><i>Frontiers in Bioengineering and Biotechnology</i> 10, 1028857</p>
+            </div>
+          </li>
+        </ol>
+        <p class="more">The full list is on <a href="https://scholar.google.com/citations?user=RzqymykAAAAJ" rel="noopener">Google Scholar</a>.</p>
+      </div>
+    </section>
+
+    <section class="section" id="contact" aria-labelledby="contact-h">
+      <h2 id="contact-h">Contact</h2>
+      <div class="contact">
+        <a class="email" href="mailto:zijie.cheng.23@ucl.ac.uk">zijie.cheng.23@ucl.ac.uk</a>
+        <button class="btn" type="button" id="copy-email">Copy address</button>
+        <address>UCL Hawkes Institute and Department of Computer Science, University College London, London, United Kingdom</address>
+      </div>
+    </section>
+  </main>
+
+  <footer>Zijie Cheng · London</footer>
+</div>
+
+<script>
+(function () {
+  var btn = document.getElementById("copy-email");
+  if (!btn) return;
+  btn.addEventListener("click", function () {
+    var done = function (text) {
+      btn.textContent = text;
+      setTimeout(function () { btn.textContent = "Copy address"; }, 1800);
+    };
+    try {
+      navigator.clipboard.writeText("zijie.cheng.23@ucl.ac.uk").then(
+        function () { done("Copied"); },
+        function () { done("Select the address to copy"); }
+      );
+    } catch (e) { done("Select the address to copy"); }
+  });
+})();
+</script>
+</body>
+</html>
